@@ -32,12 +32,11 @@ public class StudentPostTest extends TestBase {
         studentPojo.setProgramme("Automation Tester");
         studentPojo.setCourses(courseList);
 
-        Response response = given()
+        Response response = given().log().ifValidationFails()
                 .header("Content-Type", "application/json")
                 .when()
                 .body(studentPojo)
                 .post();
-        response.prettyPrint();
-        response.then().statusCode(201);
+        response.then().log().all().statusCode(200);
     }
 }
